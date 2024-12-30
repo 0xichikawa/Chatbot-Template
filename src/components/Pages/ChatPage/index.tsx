@@ -50,28 +50,28 @@ function ChatPage() {
   };
 
   const handleStartRecording = () => {
-    if(isRecording) {
-        setIsRecording(false)
+    if (isRecording) {
+      setIsRecording(false)
     } else {
-        setIsRecording(true);
-        vapi.start(import.meta.env.VITE_CHAT_ID);
-        vapi.send({
-            type: "add-message",
-            message: {
-              role: "system",
-              content: newMessage,
-            },
-          });
+      setIsRecording(true);
+      vapi.start(import.meta.env.VITE_CHAT_ID);
+      vapi.send({
+        type: "add-message",
+        message: {
+          role: "system",
+          content: newMessage,
+        },
+      });
     }
-    
+
     // Start WebRTC recording here (using a library like simple-peer)
   };
 
-  const handleStopRecording = () => {
-    setIsRecording(false);
-    // Stop WebRTC recording here 
-    handleSendMessage();
-  };
+  // const handleStopRecording = () => {
+  //   setIsRecording(false);
+  //   // Stop WebRTC recording here 
+  //   handleSendMessage();
+  // };
 
   return (
     <div className="flex w-screen h-screen p-5">
@@ -80,9 +80,8 @@ function ChatPage() {
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`p-2 rounded-lg mb-2 ${
-                message.isUser ? 'bg-blue-200' : 'bg-gray-300'
-              }`}
+              className={`p-2 rounded-lg mb-2 ${message.isUser ? 'bg-blue-200' : 'bg-gray-300'
+                }`}
             >
               {message.text} {message.isVoice && '(Voice Message)'}
             </div>
@@ -100,9 +99,8 @@ function ChatPage() {
           <div className="flex">
             <button
               onClick={handleStartRecording}
-              className={`ml-2 p-2 rounded-lg ${
-                isRecording ? 'bg-red-500 text-white' : 'bg-red-300'
-              }`}
+              className={`ml-2 p-2 rounded-lg ${isRecording ? 'bg-red-500 text-white' : 'bg-red-300'
+                }`}
             >
               {isRecording ? 'Stop Recording' : 'Record'}
             </button>
